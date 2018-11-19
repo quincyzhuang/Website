@@ -1,9 +1,31 @@
-<HTML>
-<head></head>
-<body>
-<div>
-  TEST
-</div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  </head>
+  <body>
+    <template id="first-video" data-next-video="first-video">
+    <stream id="b6868c1fd42007d6e0f3396477a95692"></stream><script data-cfasync="false" defer type="text/javascript" src="https://embed.cloudflarestream.com/embed/we4g.fla9.latest.js?video=b6868c1fd42007d6e0f3396477a95692"></script>    
+    </template>
 
-</body>
-</HTML>
+    <template id="second-video" data-next-video="first-video">
+    <stream id="5185063ceed2f7410c58d7ba3e435f6a"></stream><script data-cfasync="false" defer type="text/javascript" src="https://embed.cloudflarestream.com/embed/we4g.fla9.latest.js?video=5185063ceed2f7410c58d7ba3e435f6a"></script>    
+    </template>
+
+    <button id="load-next-video">Load Next Video</button>
+
+    <div id="video" data-next-video="first-video"></div>
+
+    <script>
+      document.getElementById("load-next-video").addEventListener("click", function() {
+        var nextVideoID = document.getElementById("video").dataset.nextVideo;  
+        var template = document.getElementById(nextVideoID);
+        var clone = document.importNode(template.content, true);
+        document.getElementById("video").appendChild(clone);
+        document.getElementById("video").dataset.nextVideo = template.dataset.nextVideo;
+      });
+    </script>
+  </body>
+</html>
+
